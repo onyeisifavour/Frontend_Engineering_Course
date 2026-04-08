@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add your GitHub Link here]
-- Live Site URL: [Add your Vercel/GitHub Pages Link here]
+- Solution URL: [HTML](https://raw.githubusercontent.com/onyeisifavour/Frontend_Engineering_Course/aa9e00f6452e8deb95123421b55d59d94e51f6e4/frontend_mentor_actvities/blog_preview_card/index.html), [CSS](https://raw.githubusercontent.com/onyeisifavour/Frontend_Engineering_Course/aa9e00f6452e8deb95123421b55d59d94e51f6e4/frontend_mentor_actvities/blog_preview_card/style.css)
+- Live Site URL: [Vercel link](https://frontend-engineering-course-yckr.vercel.app/)
 
 ## My process
 
@@ -89,7 +89,7 @@ In future projects, I want to further refine my **State-Awareness** logic, speci
 
 ### Useful resources
 
-  - [Personalised Syllabus](https://www.google.com/search?q=%23) - This project helped me fulfill the requirements for Module B: Design Tokens and Structural Engineering.
+  - [Personalised Syllabus](https://docs.google.com/document/d/1TgPFNW-OqtXGSifFk82iYjHp-vgLkF40hdLoxgm9IKU/edit?usp=sharing) - This project helped me fulfill the requirements for Module B: Design Tokens and Structural Engineering.
   - [MDN - font-display](https://www.google.com/search?q=https://developer.mozilla.org/en-US/docs/Web/CSS/%40font-face/font-display) - This helped me understand the "swap" value to prevent "Flash of Invisible Text."
 
 ### AI Collaboration
