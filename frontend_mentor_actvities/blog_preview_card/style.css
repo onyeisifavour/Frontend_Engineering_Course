@@ -1,0 +1,191 @@
+/*trying to add font link here*/
+@font-face {
+    font-family: figtree;
+    src: url(./assets/fonts/Figtree-VariableFont_wght.ttf) format("truetype");
+    font-display: swap;
+}
+
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    /* primitives */
+    --yellow: hsl(47, 88%, 63%);
+    --white: hsl(0, 0%, 100%);
+    --gray-500: hsl(0, 0%, 42%);
+    --gray-950: hsl(0, 0%, 7%);
+
+    --primary: var(--white);
+    --secondary: var(--yellow);
+    --accent: var(--gray-950);
+    
+    --text-base: 1rem;
+    --type-scale: 1.25;
+    --base-unit: 8px;
+    --gap: calc(var(--base-unit) * 1.5);
+  
+    --bg-main: var(--secondary);
+    --bg-surface: var(--primary);
+    --surface-border: var(--gray-500);
+    --shadow-color: var(--gray-950);
+
+    /* --text */
+    --text-s: calc(var(--text-base)/var(--type-scale));
+    --text-md: calc(var(--text-base)*var(--type-scale));
+    --text-l: calc(var(--text-md)*var(--type-scale));
+    --text-wt-bold: 800;
+    --text-wt-normal: 500;
+
+    --text-primary: var(--gray-950);
+    --text-muted: var(--gray-500);
+}
+
+.dark-theme{
+    --bg-main: hsl(220, 18%, 12%);
+    --bg-surface: hsl(222, 18%, 18%);
+    --text-primary: hsl(0, 0%, 95%);
+    --text-muted: hsl(0, 0%, 75%);
+    --surface-border: hsl(0, 0%, 35%);
+    --shadow-color: hsl(0, 0%, 0%);
+}
+
+body{
+    align-items: center;
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    font-family: figtree, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.theme-toggle {
+    margin: var(--gap);
+    padding: calc(var(--base-unit) * 1) calc(var(--base-unit) * 2);
+    cursor: pointer;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 2px solid var(--accent);
+    font-weight: var(--text-wt-bold);
+    border-radius: 4px;
+}
+
+main{
+    display: grid;
+    place-items: center;
+    padding: calc(var(--base-unit) * 4);
+    width: 100%;
+}
+
+article{
+    /* aspect-ratio: 1.5/1; */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-surface);
+    border-radius: 12px;
+    border: 1px solid var(--accent);
+    box-shadow: 8px 8px var(--accent);
+    gap: var(--gap);
+    max-width: 24rem;
+    padding: calc(var(--base-unit) * 3); /*would prefer a clamp() here*/;
+    width: 100%;
+}
+
+article:focus-within{
+    box-shadow: 12px 12px var(--accent);
+    outline: 4px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.illustration-img{
+    border-radius: 10px;
+    width: 100%;
+}
+
+/* .illustration-img{
+    margin-bottom: var(--gap);
+} Not needed gap on article handle spacing between elements to keep dumb and reusable*/
+
+.label{
+    background-color: var(--secondary);
+    border-radius: calc(var(--base-unit) / 2);
+    font-size: 0.75rem;
+    font-weight: var(--text-wt-bold);
+    padding: calc(var(--base-unit) * 0.75);
+    align-self: flex-start;
+}
+
+.date{
+    font-size: 0.875rem;
+    font-weight: var(--text-wt-normal);
+}
+
+.title{
+    color: var(--text-primary);
+    font-weight: var(--text-wt-bold);
+    font-size: var(--text-l);
+    line-height: 1.25;
+    text-decoration: none;
+}
+
+.title:hover{
+    color: var(--secondary);
+}
+
+.title:focus-visible{
+    text-decoration: underline;
+    outline: 4px solid var(--bg-main);
+    outline-offset: 4px;
+    border-radius: 4px;
+
+}
+
+.descr-p{
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/*will apply when js creates/modify matching element*/
+.author-section{
+    align-items: center;
+    display: flex;
+    gap: var(--gap);
+    align-self: flex-start;
+    /*what vertical alignments*/
+}
+
+.author-avatar{
+    border: 2px solid var(--surface-border);
+    border-radius: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 2rem;
+    width: 2rem;
+    transition: scale 0.2s ease, box-shadow 0.2s ease;
+}
+
+.author-avatar:hover{
+    box-shadow:
+     1px 2px 12px hsl(from var(--shadow-color) h s l/0.2),
+     -1px -2px 12px hsl(from var(--shadow-color) h s l/0.2);
+    scale: 1.02;
+}
+
+.author-name{
+    font-size: 0.875rem;
+    font-weight: var(--text-wt-bold);
+    text-transform: capitalize;
+}
+
+.attribution{
+    background-color: var(--bg-surface);
+    border-radius: calc(var(--base-unit) * 2);
+    color: var(--text-muted);
+    font-size: var(--text-s);
+    font-weight: var(--text-wt-normal);
+    padding: var(--base-unit);
+    margin: calc(var(--base-unit) * 2);
+}

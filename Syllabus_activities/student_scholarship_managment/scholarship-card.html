@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    :root{
+        --base-unit: 8px;
+        --type-scale: 1.25;
+    
+        --text-base: 1rem;
+        --text-md: calc(var(--type-scale) * var(--text-base));
+    
+        --primary-color: hsl(211, 100%, 50%);
+        --primary-dark: hsla(211, 100%, 35%, 1);
+        --shadow-color: hsl(211, 80%, 20%);
+        --text-light: hsl(220, 15%, 97%);
+
+        --shadow-base-h: 211;
+        --shadow-base-s: 50%;
+        --shadow-base-l: 10%;
+    }
+
+    body{
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgb(0, 119, 255);
+    }
+
+    .card{
+        width: 75vmin;
+        height: 75vmin;
+
+        max-width: 500px;
+        max-height: 500px;
+
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        justify-content: center;
+        gap: var(--base-unit);
+
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 12px;
+        border: 1px solid transparent;
+        box-shadow: 0 4px 16px hsl(from var(--shadow-color) h s l / 0.12);
+
+        transition: transform 0.2s ease, border-color 0.2s ease, scale 0.2s ease;
+    }
+
+    .card:hover, .card:focus-within{
+      border-color: var(--primary-dark);
+      transform: translateY(-2px);
+      scale: 1.01;
+      box-shadow:
+      0 5px 15px hsl(var(--shadow-base-h) var(--shadow-base-s) var(--shadow-base-l) / 0.05),
+      0 15px 35px hsl(var(--shadow-base-h) var(--shadow-base-s) var(--shadow-base-l) / 0.05);
+      }
+
+    .card-btn{
+      width: 60%;
+      align-self: center;
+      padding: clamp(0.5rem, 2vw, 1rem);
+      border: none;
+      border-radius: 999px;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      font-size: var(--text-base);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .card-btn:hover{
+      background-color: var(--primary-dark);
+    }
+
+    .card-body{
+      height: calc(var(--base-unit) * 16);
+    } 
+
+    @supports(aspect-ratio: 1/1){
+        .card{
+            aspect-ratio: 1/1;
+            height: auto;
+        }
+    }
+  </style>
+
+</head>
+<body>
+  <article class="card">
+  <h2 class="card-title">Scholarship 2027</h2>
+  <p class="card-body">Apply now to secure your future.</p>
+  <button class="card-btn">Learn More</button>
+  </article>
+</body>
+</html>

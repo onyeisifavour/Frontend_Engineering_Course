@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>Frontend Mentor | Blog preview card</title>
+
+</head>
+<body class="">
+  <section class="publisher-info-form">
+    <!-- This is where javascript gets info to fill into dynamically generated contents -->
+  </section>
+  <button id="theme-sticker" class="theme-toggle">Change Theme</button>
+  <main class="hidden">
+    <article>
+      <img class="illustration-img" src="./assets/images/illustration-article.svg" alt="code theme illustration image">
+      <small class="label">Learning</small>
+      <time class="date" datetime="2026-04-07">Published 07 Apr 2026</time>
+      <h1><a class="title" href="#">HTML & CSS foundations</a></h1>
+      <p class="descr-p">  These languages are the backbone of every website, defining structure, content, and presentation.</p>
+      <div class="author-section">
+        <a href="#" target="_blank" rel="noopener noreferrer"><img class="author-avatar" src="" alt=""></a>
+        <!-- src and alt will be generated dynamically with js -->
+        <small class="author-name"><!--dynamic generation--></small>
+      </div>
+    </article>
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="#"><!--dynamic generation--></a>.
+  </footer>
+  
+  <script>
+  const btn = document.querySelector('#theme-sticker');
+  
+  btn.addEventListener('click', () => {
+    // This looks at the body and adds the class if it's missing, 
+    // or removes it if it's already there.
+    document.body.classList.toggle('dark-theme');
+  });
+</script>
+</body>
+</html>

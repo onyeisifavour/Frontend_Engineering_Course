@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!--FIX #1added viewport meta tag-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — (buggy)</title>
+  <link rel="stylesheet" href="./assets/css/examples.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style></style>
+
+</head>
+<body>
+  <!-- landing page -->
+  <div class="appPage1">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" role="navigation" aria-label="Main navigation">
+      <div class="brand" tabindex="0">Crystex Admin</div>
+
+      <!-- A2 FIX #6: remove inline style attribute below (style="margin-top:18px")
+           and use .sidebar nav { margin-top: 18px; } in the CSS (see comment above) -->
+      <nav>
+        <ul>
+          <li><a class="nav-item" href="#dashboard">Dashboard</a></li>
+          <li><a class="nav-item" href="#reports">Reports</a></li>
+          <li><a class="nav-item" href="#settings">Settings</a></li>
+          <li><a class="nav-item" href="#creatorPortfolio">Creator Portfolio</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <div class="user">
+          <!-- FIX #6 (done earlier): ensure alt attribute exists -->
+          <img class="user-avatar" src=".//assets/media/images/my_avatar.jpg" alt="Favour Onyeisi Avatar"/>
+          <div>
+            <div class="name">Favour Onyeisi</div>
+            <div class="userRole">Administrator</div> 
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main" role="main">
+      <div class="topbar" role="region" aria-label="Top bar">
+        <div class="search">Search... (broken demo)</div>
+        <div class="controls">
+          <!-- A2 FIX #5: remove inline style on this button (style="background-color: transparent; border: none;")
+               and leave only id="notifBtn". Then paste the #notifBtn CSS (see comment above). -->
+          <button  id="notifBtn" aria-label="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+        </div>
+      </div>
+
+      <section class="stats" aria-label="Statistics overview">
+        <!-- BUG: uses class names that CSS didn't target -->
+        <div class="stat-card">
+          <div class="k">Users</div>
+          <div class="v">3,420</div>
+        </div>
+        <div class="stat-card">
+          <div class="k">Revenue</div>
+          <div class="v">$12,430</div>
+        </div>
+        <div class="stat-card">
+          <div class="k">Errors</div>
+          <div class="v">18</div>
+        </div>
+      </section>
+
+      <section class="content-grid" aria-label="Main content grid">
+        <div class="card contentGridCard">
+          <h3>Live Chart</h3>
+          <div>(chart placeholder)</div>
+        </div>
+
+        <div class="card contentGridCard">
+          <h3>Recent Activity</h3>
+          <ul style="margin:0; padding:0 0 0 16px;">
+            <li>Server restart — 2h ago</li>
+            <li>User signup — 4h ago</li>
+          </ul>
+        </div>
+
+        <div class="card contentGridCard">
+          <h3>Tickets</h3>
+          <table aria-label="Tickets table">
+            <thead>
+              <tr><th>Id</th><th>Title</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>#23</td><td>Login issue</td><td>Open</td></tr>
+              <tr><td>#22</td><td>Payment bug</td><td>Resolved</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section style="margin-top:18px" aria-label="Footer area">
+        <div class="footer">© 2025 Crystex — All rights reserved</div>
+      </section>
+    </main>
+  </div>
+
+  <!--  **********************
+
+          end of landing page 
+
+        **********************  -->
+
+   <div class="appPage2"> <div class="appPage2_body">
+
+      <header class="appPage2_header" style="">
+        <div class="branding" style="">
+          <div class="logo"><img class="logo" style="" src=".//assets/media/images/Cropped logo.png" alt="" srcset=""></div>
+          <span>CRYSTEX</span>
+        </div>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contacts">Contacts</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="profile">
+          <h1>Hello, I'm Favour</h1>
+          <p>
+            Software Engineer and Founder of CRYSTEX.
+            I build clean, high-performance web applications
+            that focus on user experience.
+          </p>
+          <button type="button">Veiw My Work</button>
+        </div>
+
+        <div class="about">
+          <h3>About Me</h3>
+          <p>
+            My journey in software engineering is driven
+            by a passion for elegant problem-solving and
+            clean architecture. I specialize in the full-stack
+            ecosystem, with deep expertise in modern JavaScript
+            frameworks (React/Angular) and robust backend services
+            (Node.js/Python). My goal is always to deliver scalable
+            solutions that are maintainable and delightful to use.
+          </p>
+          <p>
+            The CRYSTEX logo represents my core philosophy: clarity,
+            precision, and foundational structure. I strive to bring
+            this crystalline focus to every project, ensuring robust
+            performance and beautiful design. Let's build something
+            exceptional together.
+          </p>
+        </div>
+
+        <div class="projects">
+          <h3>Featured Projects</h3>
+          <div class="projectCards">
+            <!-- autogenerated using js-->
+          </div>
+        </div>
+
+        <div class="contacts">
+          <h3>Let's Connect</h3>
+          <div>
+            <p>Hover over the card below to flip it
+              and download my contact details.
+            </p>
+            <img style="width: 70px; height: 50px;"src="/assets/media/images/My_business_card.png" alt="" srcset="">
+            <div style="display: grid;">
+              <div><img class="logo bizCardLogo" src=".//assets/media/images/Cropped logo.png" alt="" srcset=""></div>
+              <div>CRYSTEX</div>
+              <div>Favour</div>
+              <div>Software Engineer</div>
+              <div>
+                 <div>
+                  <i style="display: block;" class="fa-regular fa-envelope" style="color: rgb(255, 255, 255);"></i>
+                  <i style="display: block;" class="fa-solid fa-globe" style="color: rgb(255, 255, 255);"></i>
+                  <i style="display: block;" class="fa-solid fa-phone" style="color: rgb(255, 255, 255);"></i>
+                </div>
+                 <div>
+                  <span style="display: block;">onyeisifavour02@gmail.com</span>
+                  <span style="display: block;">www.crystex.com</span>
+                  <span style="display: block;">+2347081926298</span>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+      </main>
+
+      <footer>
+        <div>© 2025 Favour. All rights reserved. | Built with Clarity and Precision.</div>
+      </footer>
+    </div>
+
+    </div>
+
+  <script>
+    // Small JS with a deliberate selector typo — not required for Set 1, but will be used later
+    document.getElementById('notifBtn').addEventListener('click', function () {
+      console.log('open notifications');
+      //BUG this selector purposely wrong for later tests
+      const avatar = document.querySelector('.user-img');
+      if (!avatar) {
+        console.warn('avatar not found (expected .user-img)'); // intentional
+      }
+    });
+  </script>
+</body>
+</html>

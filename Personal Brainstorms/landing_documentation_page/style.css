@@ -1,0 +1,104 @@
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+:root{
+    /*primitves*/
+    --orange-shade:hsl(37, 100%, 50%);
+    --blue-shade: hsl(208, 100%, 50%);
+    --gray-shade: hsl(208, 10%, 50%);
+
+    --gray-shade-700: hsl(208, 50%, 10%);
+    --gray-shade-100: hsl(208, 6%, 90%);
+    --blue-shade-100: hsl(208, 100%, 97%);
+    --orange-shade-100: hsl(37, 100%, 95%);
+
+    --base-unit: 8px;
+    --type-scale: 1.25;
+    --text-base: 1rem;
+    --text-md: calc(var(--type-scale) * var(--text-base));
+    --text-large: calc(var(--type-scale) * var(--text-md));
+    --text-light: hsl(208, 15%, 97%);
+    --text-primary:  var(--gray-shade-700);
+
+    --primary-color: var(--blue-shade);
+    --secondary-color: var(--orange-shade);
+    --bg-main: var(--gray-shade-100);
+    --bg-surface: var(--blue-shade-100);
+
+
+
+    --shadow-base-h: 208;
+    --shadow-base-s: 50%;
+    --shadow-base-l: 10%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+
+}
+
+header{
+    display: flex;
+    justify-content: flex-end;
+    padding:clamp( 1rem, var(--base-unit) + 1vw, 4rem);
+    container-type: inline-size;
+    background-color: var(--bg-surface);
+}
+
+.go-to-main-site__btn{
+    background-color: var(--secondary-color);
+    padding: clamp(0.7rem, 5cqi, 1rem) clamp(1rem, 10cqi, 2rem);
+    border-radius: 12px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: backgroun-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.go-to-main-site__btn:hover{
+    background-color: hsl(from var(--secondary-color) h s 60%);
+    box-shadow: 0 2px 8px hsla(var(--shadow-base-h), var(--shadow-base-s), var(--shadow-base-s), 0.3);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    flex-grow: 1;
+    background-color: var(--bg-main);
+    gap: 10px;
+}
+
+.view-documentation{
+    background-color: var(--primary-color);
+    padding: clamp(0.7rem, 5cqi, 1rem) clamp(1rem, 10cqi, 2rem);
+    border-radius: 12px;
+    border: none;
+    color: var(--text-light);
+    font-weight: 600;text-decoration: none;
+    cursor: pointer;
+    transition: backgroun-color 0.3s ease, box-shadow 0.3s ease, scale 0.3s ease;
+}
+
+.view-documentation:hover{
+    background-color: hsl(from var(--primary-color) h s 40%);
+    box-shadow: 0 4px 18px 2px hsla(var(--shadow-base-h), var(--shadow-base-s), var(--shadow-base-s), 0.5);
+    scale: 1.05;
+
+}
+
+h1{
+    text-align: center;
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+}

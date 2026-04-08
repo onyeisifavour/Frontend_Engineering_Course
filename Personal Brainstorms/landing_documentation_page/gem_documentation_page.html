@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevPortal | Documentation Gateway</title>
+    <style>
+        /* CONSTRUCTRIX ARCHITECTURAL VERSION
+           Design Pattern: Asymmetrical Split-Screen
+           Focus: Visual Hierarchy & Rendering Performance
+        */
+
+        :root {
+            /* Refined Professional Palette */
+            --clr-primary: hsl(215, 90%, 55%);
+            --clr-accent: hsl(25, 95%, 50%);
+            --clr-bg: hsl(220, 20%, 97%);
+            --clr-surface: hsl(0, 0%, 100%);
+            --clr-text-max: hsl(220, 40%, 10%);
+            --clr-text-mid: hsl(220, 10%, 45%);
+            
+            /* Elevation Tokens */
+            --shadow-soft: 0 10px 40px -10px hsla(220, 40%, 10%, 0.08);
+            --border-subtle: 1px solid hsla(220, 20%, 10%, 0.08);
+            
+            /* Fluid System */
+            --space-unit: clamp(1rem, 2vw, 2.5rem);
+            --fs-h1: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--clr-bg);
+            color: var(--clr-text-max);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ASYMMETRICAL WRAPPER */
+        .page-wrapper {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            min-height: 100vh;
+        }
+
+        /* VISUAL SIDE (LEFT) */
+        .brand-visual {
+            display: none; /* Hidden on mobile */
+            flex: 1;
+            background: linear-gradient(135deg, var(--clr-primary), hsl(215, 80%, 40%));
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 900px) {
+            .brand-visual { display: flex; align-items: center; justify-content: center; }
+        }
+
+        /* Abstract Decorative Elements (Module A6) */
+        .brand-visual::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            top: -25%;
+            left: -25%;
+            animation: pulse 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1) rotate(0deg); }
+            to { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* CONTENT SIDE (RIGHT) */
+        .content-area {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-unit);
+            background-color: var(--clr-bg);
+            position: relative;
+        }
+
+        /* LOGICAL HEADER (Tucked) */
+        .top-nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: auto;
+        }
+
+        .link-back {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--clr-text-mid);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: var(--border-subtle);
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .link-back:hover {
+            border-color: var(--clr-accent);
+            color: var(--clr-accent);
+            transform: translateX(-5px);
+        }
+
+        /* MAIN HERO WRAPPER */
+        .hero-container {
+            margin: auto 0;
+            max-width: 540px;
+            padding-left: clamp(0rem, 5vw, 4rem);
+        }
+
+        .eyebrow {
+            color: var(--clr-primary);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .main-title {
+            font-size: var(--fs-h1);
+            line-height: 1.1;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .main-title span {
+            color: var(--clr-primary);
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: var(--clr-text-mid);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ACTION SYSTEM */
+        .action-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 1.25rem 2.5rem;
+            background-color: var(--clr-text-max);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.02);
+            background-color: var(--clr-primary);
+        }
+
+        .btn-cta svg {
+            margin-left: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* ACCESSIBILITY (Module A8) */
+        .btn-cta:focus-visible, .link-back:focus-visible {
+            outline: 3px solid var(--clr-primary);
+            outline-offset: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+        <!-- Visual Sidebar -->
+        <aside class="brand-visual" aria-hidden="true">
+            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="40" y="40" width="120" height="120" rx="20" stroke="white" stroke-width="8" stroke-dasharray="20 10" />
+                <circle cx="100" cy="100" r="30" fill="white" opacity="0.3" />
+            </svg>
+        </aside>
+
+        <!-- Main Content Area -->
+        <section class="content-area">
+            <nav class="top-nav">
+                <a href="#" class="link-back">Return to Main Site</a>
+            </nav>
+
+            <main class="hero-container">
+                <span class="eyebrow">Developer Resources</span>
+                <h1 class="main-title">Engineering <span>Standards</span> & Docs</h1>
+                <p class="description">
+                    The source of truth for our architecture. Explore components, API references, and the design tokens that power our ecosystem.
+                </p>
+
+                <div class="action-group">
+                    <a href="#" class="btn-cta">
+                        Start Reading
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4.16663 10H15.8333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 4.16669L15.8333 10L10 15.8334" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </main>
+        </section>
+    </div>
+
+</body>
+</html>
