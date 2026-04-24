@@ -121,6 +121,7 @@ article:focus-within{
 .date{
     font-size: 0.875rem;
     font-weight: var(--text-wt-normal);
+    color: var(--text-primary);
 }
 
 .title{
@@ -188,4 +189,8 @@ article:focus-within{
     font-weight: var(--text-wt-normal);
     padding: var(--base-unit);
     margin: calc(var(--base-unit) * 2);
+}
+
+.hidden{
+    display: none;
 }
