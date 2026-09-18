@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+    body{
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      grid-template-rows: repeat(3, 50px);
+      gap: 10px;
+      align-content: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .opt{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="opt" data-index="0"></div>
+  <div class="opt" data-index="1"></div>
+  <div class="opt" data-index="2"></div>
+  <div class="opt" data-index="3"></div>
+  <div class="opt" data-index="4"></div>
+  <div class="opt" data-index="5"></div>
+  <div class="opt" data-index="6"></div>
+  <div class="opt" data-index="7"></div>
+  <div class="opt" data-index="8"></div>
+
+  <script>
+
+    let body = document.querySelector("body");
+    let boardState = ["", "", "", "", "", "", "", "", ""];
+    let currentPlayer = "O";
+    const psbWinPttrns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6]
+    ];
+
+
+    body.addEventListener('click', function (e) {
+      const el = e.target
+      const index = el.dataset.index
+      
+      if (el === body) {
+        return
+      }
+
+      if (boardState[index] !== ""){return}
+
+      if(currentPlayer === "X"){
+         currentPlayer = "O";
+       } else {
+         currentPlayer = "X";
+       }
+
+      el.textContent = currentPlayer;
+      boardState[index] = currentPlayer;
+
+      console.log(`present: ${currentPlayer}, index: ${index}`)
+    });
+
+  </script>
+  
+</body>
+</html>
