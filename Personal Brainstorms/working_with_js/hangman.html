@@ -54,7 +54,6 @@
             justify-content: center;
         }
 
-        /* Style for individual letter slots (if you create them with JS) */
         .text-blanks .letter-space {
             border-bottom: 4px solid #2c3e50;
             width: 40px;
@@ -110,100 +109,106 @@
     <div class="keyboard"></div>
 
     <script>
-        const keyboardContainer = document.querySelector('.keyboard');
-        const dashesContainer = document.querySelector(".text-blanks");
-        const categoryTitle = document.querySelector(".category-title");
-        const geussCounter = document.querySelector(".geuss-counter span");
-        const answerText = document.querySelector(".geuss-answer");
+        const keyboardContainer = document.querySelector('.keyboard');
+        const dashesContainer = document.querySelector(".text-blanks");
+        const categoryTitle = document.querySelector(".category-title");
+        const geussCounter = document.querySelector(".geuss-counter span");
+        const answerText = document.querySelector(".geuss-answer");
 
-        let geussesLeft = 7;
+        let geussesLeft = 7;
 
-        const kitchenUtensils = {
-            title: "Kitchen Utensils",
-            items: ["spatula", "spoon", "fork", "sieve", "plate", "pot", "whisk", "cup", "knife", "pan", "bowl", "grater", "ladle", "tongs"]
-        };
-        const householdItems = {
-            title: "Household Items",
-            items: ["broom", "chair", "table", "bulb", "door", "curtain", "bed", "window", "mirror", "rug", "cushion", "lamp", "drawer", "cabinet"]
-        };
-        const townRelated = {
-            title: "Town Related",
-            items: ["street", "road", "avenue", "alley", "square", "park", "fountain", "bridge", "market", "plaza", "station", "library", "museum", "theater"]
-        };
-        const animalNames = {
-            title: "Animal Names",
-            items: ["cat", "dog", "elephant", "giraffe", "lion", "tiger", "bear", "zebra", "kangaroo", "panda", "monkey", "dolphin", "whale", "shark"]
-        };
+        const kitchenUtensils = {
+            title: "Kitchen Utensils",
+            items: ["spatula", "spoon", "fork", "sieve", "plate", "pot", "whisk", "cup", "knife", "pan", "bowl", "grater", "ladle", "tongs"]
+        };
+        const householdItems = {
+            title: "Household Items",
+            items: ["broom", "chair", "table", "bulb", "door", "curtain", "bed", "window", "mirror", "rug", "cushion", "lamp", "drawer", "cabinet"]
+        };
+        const townRelated = {
+            title: "Town Related",
+            items: ["street", "road", "avenue", "alley", "square", "park", "fountain", "bridge", "market", "plaza", "station", "library", "museum", "theater"]
+        };
+        const animalNames = {
+            title: "Animal Names",
+            items: ["cat", "dog", "elephant", "giraffe", "lion", "tiger", "bear", "zebra", "kangaroo", "panda", "monkey", "dolphin", "whale", "shark"]
+        };
 
-        const wordDictionary = [kitchenUtensils, householdItems, townRelated, animalNames];
-        const buttonsArray = [];
+        const wordDictionary = [kitchenUtensils, householdItems, townRelated, animalNames];
+        const buttonsArray = [];
 
-        let randomlyChoosenCategory;
-        let randomlyChoosenWord;
-        let dash;
-        let remainingLetters;
+        let randomlyChoosenCategory;
+        let randomlyChoosenWord;
+        let dash;
+        let remainingLetters;
 
-        function initialiseGame(){
-            randomlyChoosenCategory = wordDictionary[Math.floor(Math.random() * wordDictionary.length)];
-            randomlyChoosenWord = randomlyChoosenCategory.items[Math.floor(Math.random() * randomlyChoosenCategory.items.length)];
+        function initialiseGame(){
+            randomlyChoosenCategory = wordDictionary[Math.floor(Math.random() * wordDictionary.length)];
+            randomlyChoosenWord = randomlyChoosenCategory.items[Math.floor(Math.random() * randomlyChoosenCategory.items.length)];
 
-            remainingLetters = new Set(randomlyChoosenWord);
-            for (let i = 0; i < randomlyChoosenWord.length; i++) {
-                dash = document.createElement("div");
-                dash.classList.add("letter-space");
-                dashesContainer.appendChild(dash);
-                dash.dataset.index = i;
-            }
+            remainingLetters = new Set(randomlyChoosenWord);
+            for (let i = 0; i < randomlyChoosenWord.length; i++) {
+                dash = document.createElement("div");
+                dash.classList.add("letter-space");
+                dashesContainer.appendChild(dash);
+                dash.dataset.index = i;
+            }
 
-            categoryTitle.textContent = randomlyChoosenCategory.title
-        }
+            categoryTitle.textContent = randomlyChoosenCategory.title
+        }
 
-        for (let i = 97; i <= 122; i++) {
-            const letter = String.fromCharCode(i);
+        const letterRows = [
+            ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+            ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+            ["z", "x", "c", "v", "b", "n", "m"]
+        ];
 
-            const button = document.createElement("button");
-            button.textContent = letter.toUpperCase();
-            button.value = letter;
-            buttonsArray.push(button);
+        for (let i = 97; i <= 122; i++) {
+            const letter = String.fromCharCode(i);
 
-            button.addEventListener("click", (e) => {
-                handleGuess(letter, button);
-            });
+            const button = document.createElement("button");
+            button.textContent = letter.toUpperCase();
+            button.value = letter;
+            buttonsArray.push(button);
 
-            keyboardContainer.appendChild(button);
-        }
+            button.addEventListener("click", (e) => {
+                handleGuess(letter, button);
+            });
 
-        function handleGuess(letter, button) {
-            button.disabled = true;
-        
-            if (randomlyChoosenWord.includes(letter)) {
-                let index = randomlyChoosenWord.indexOf(letter);
-                while (index !== -1) {
-                    const matchingDash = dashesContainer.querySelector(`[data-index="${index}"]`);
-                    if (matchingDash) matchingDash.textContent = letter;
-                    index = randomlyChoosenWord.indexOf(letter, index + 1);
-                }
-            
-                remainingLetters.delete(letter);
-            
-                if (remainingLetters.size === 0) {
-                    buttonsArray.forEach(b => b.disabled = true);
-                    answerText.textContent = "You won!";
-                }
-            } else {
-                geussesLeft -= 1;
-                geussCounter.textContent = geussesLeft;
-            
-                if (geussesLeft === 0) {
-                    buttonsArray.forEach(b => b.disabled = true);
-                    answerText.textContent = `Game over! The answer was ${randomlyChoosenWord}`;
-                }
-            }
-        }
+            keyboardContainer.appendChild(button);
+        }
 
-        initialiseGame();
-        console.log(randomlyChoosenCategory);
-        console.log(randomlyChoosenWord);
+        function handleGuess(letter, button) {
+            button.disabled = true;
+        
+            if (randomlyChoosenWord.includes(letter)) {
+                let index = randomlyChoosenWord.indexOf(letter);
+                while (index !== -1) {
+                    const matchingDash = dashesContainer.querySelector(`[data-index="${index}"]`);
+                    if (matchingDash) matchingDash.textContent = letter;
+                    index = randomlyChoosenWord.indexOf(letter, index + 1);
+                }
+            
+                remainingLetters.delete(letter);
+            
+                if (remainingLetters.size === 0) {
+                    buttonsArray.forEach(b => b.disabled = true);
+                    answerText.textContent = "You won!";
+                }
+            } else {
+                geussesLeft -= 1;
+                geussCounter.textContent = geussesLeft;
+            
+                if (geussesLeft === 0) {
+                    buttonsArray.forEach(b => b.disabled = true);
+                    answerText.textContent = `Game over! The answer was ${randomlyChoosenWord}`;
+                }
+            }
+        }
+
+        initialiseGame();
+        console.log(randomlyChoosenCategory);
+        console.log(randomlyChoosenWord);
         
     </script>
 </body>
