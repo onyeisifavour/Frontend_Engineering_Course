@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .geuss-counter {
+            font-size: 1.1rem;
+            color: #e74c3c;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .geuss-counter span {
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-blanks {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Style for individual letter slots (if you create them with JS) */
+        .text-blanks .letter-space {
+            border-bottom: 4px solid #2c3e50;
+            width: 40px;
+            height: 50px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .keyboard button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .keyboard button:hover {
+            background-color: #2980b9;
+        }
+
+        .keyboard button:active {
+            transform: scale(0.95);
+        }
+
+        .keyboard button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="category-title"></h1>
+    <div class="geuss-counter">You have <span>7</span> geuss left.</div>
+    <p class="geuss-answer"></p>
+    <div class="text-blanks"></div>
+    <div class="keyboard"></div>
+
+    <script>
+        const keyboardContainer = document.querySelector('.keyboard');
+        const dashesContainer = document.querySelector(".text-blanks");
+        const categoryTitle = document.querySelector(".category-title");
+        const geussCounter = document.querySelector(".geuss-counter span");
+        const answerText = document.querySelector(".geuss-answer");
+
+        let geussesLeft = 7;
+
+        const kitchenUtensils = {
+            title: "Kitchen Utensils",
+            items: ["spatula", "spoon", "fork", "sieve", "plate", "pot", "whisk", "cup", "knife", "pan", "bowl", "grater", "ladle", "tongs"]
+        };
+        const householdItems = {
+            title: "Household Items",
+            items: ["broom", "chair", "table", "bulb", "door", "curtain", "bed", "window", "mirror", "rug", "cushion", "lamp", "drawer", "cabinet"]
+        };
+        const townRelated = {
+            title: "Town Related",
+            items: ["street", "road", "avenue", "alley", "square", "park", "fountain", "bridge", "market", "plaza", "station", "library", "museum", "theater"]
+        };
+        const animalNames = {
+            title: "Animal Names",
+            items: ["cat", "dog", "elephant", "giraffe", "lion", "tiger", "bear", "zebra", "kangaroo", "panda", "monkey", "dolphin", "whale", "shark"]
+        };
+
+        const wordDictionary = [kitchenUtensils, householdItems, townRelated, animalNames];
+        const buttonsArray = [];
+
+        let randomlyChoosenCategory;
+        let randomlyChoosenWord;
+        let dash;
+        let remainingLetters;
+
+        function initialiseGame(){
+            randomlyChoosenCategory = wordDictionary[Math.floor(Math.random() * wordDictionary.length)];
+            randomlyChoosenWord = randomlyChoosenCategory.items[Math.floor(Math.random() * randomlyChoosenCategory.items.length)];
+
+            remainingLetters = new Set(randomlyChoosenWord);
+            for (let i = 0; i < randomlyChoosenWord.length; i++) {
+                dash = document.createElement("div");
+                dash.classList.add("letter-space");
+                dashesContainer.appendChild(dash);
+                dash.dataset.index = i;
+            }
+
+            categoryTitle.textContent = randomlyChoosenCategory.title
+        }
+
+        for (let i = 97; i <= 122; i++) {
+            const letter = String.fromCharCode(i);
+
+            const button = document.createElement("button");
+            button.textContent = letter.toUpperCase();
+            button.value = letter;
+            buttonsArray.push(button);
+
+            button.addEventListener("click", (e) => {
+                handleGuess(letter, button);
+            });
+
+            keyboardContainer.appendChild(button);
+        }
+
+        function handleGuess(letter, button) {
+            button.disabled = true;
+        
+            if (randomlyChoosenWord.includes(letter)) {
+                let index = randomlyChoosenWord.indexOf(letter);
+                while (index !== -1) {
+                    const matchingDash = dashesContainer.querySelector(`[data-index="${index}"]`);
+                    if (matchingDash) matchingDash.textContent = letter;
+                    index = randomlyChoosenWord.indexOf(letter, index + 1);
+                }
+            
+                remainingLetters.delete(letter);
+            
+                if (remainingLetters.size === 0) {
+                    buttonsArray.forEach(b => b.disabled = true);
+                    answerText.textContent = "You won!";
+                }
+            } else {
+                geussesLeft -= 1;
+                geussCounter.textContent = geussesLeft;
+            
+                if (geussesLeft === 0) {
+                    buttonsArray.forEach(b => b.disabled = true);
+                    answerText.textContent = `Game over! The answer was ${randomlyChoosenWord}`;
+                }
+            }
+        }
+
+        initialiseGame();
+        console.log(randomlyChoosenCategory);
+        console.log(randomlyChoosenWord);
+        
+    </script>
+</body>
+</html>
